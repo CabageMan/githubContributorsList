@@ -47,9 +47,18 @@ class ContributorsList: UITableViewController {
         let cellIdentifier = "contributorCell"
         
         // Create an instance of table view cell
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? ContributorCell else {
+            fatalError("The dequeued cell is not an instance of MealTableViewCell.")
+        }
+        
 
-        // Configure the cell...
+        // Get the contributor's data
+        let contributor = contributors[indexPath.row]
+        
+        // Fil the contributors data
+        cell.avatarImage.image = UIImage(named: "placeHolderImage.jpg")
+        cell.loginLabel.text = contributor["login"] as? String
+        cell.idLabel.text = contributor["id"] as? String
 
         return cell
     }
@@ -134,6 +143,8 @@ class ContributorsList: UITableViewController {
                             contributors.append(personData)
                         }
                         print(contributors)
+                        
+                        self.tableView.reloadData()
                     }
                     
                 } catch {
