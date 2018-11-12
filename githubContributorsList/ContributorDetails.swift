@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ContributorDetails.swift
 //  githubContributorsList
 //
 //  Created by ViktorsMacbook on 12.11.18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ContributorDetails: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

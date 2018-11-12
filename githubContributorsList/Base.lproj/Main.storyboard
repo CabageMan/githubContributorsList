@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="M92-jm-w4L">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9AP-vU-5Pa">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Contributor Details-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="githubContributorsList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ContributorDetails" customModule="githubContributorsList" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -23,6 +23,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="632.79999999999995" y="133.5832083958021"/>
         </scene>
         <!--Contributors List-->
         <scene sceneID="F63-xt-JLo">
@@ -64,6 +65,7 @@
                                     <outlet property="avatarImage" destination="h89-kt-tov" id="8aX-GC-acz"/>
                                     <outlet property="idLabel" destination="1l8-jh-0Fm" id="jmr-zn-8O9"/>
                                     <outlet property="loginLabel" destination="X4K-uZ-111" id="arj-J7-PiN"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" id="XrV-Ds-zBa"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -72,10 +74,29 @@
                             <outlet property="delegate" destination="M92-jm-w4L" id="pMg-Yn-QeK"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Contributors List" id="o3M-Za-7Zk"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9cv-cI-JAx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-679.20000000000005" y="133.5832083958021"/>
+            <point key="canvasLocation" x="-340" y="133.5832083958021"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="2zJ-Hb-oJx">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9AP-vU-5Pa" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2Zh-Tl-dMB">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="M92-jm-w4L" kind="relationship" relationship="rootViewController" id="fwG-cP-Mer"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c0m-86-dLv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1364" y="134"/>
         </scene>
     </scenes>
 </document>
