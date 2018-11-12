@@ -67,15 +67,38 @@ class ContributorsList: UITableViewController {
             fatalError("The dequeued cell is not an instance of MealTableViewCell.")
         }
         
-
         // Get the contributor's data
         let contributor = contributors[indexPath.row]
-        
         
         // Fil the contributors data
         cell.avatarImage.image = UIImage(named: "placeHolderImage.jpg")
         cell.loginLabel.text = contributor.login
         cell.idLabel.text = String(contributor.id)
+        
+        // Configure the request and replace the avatar image if it exists
+        let dataUrl = URL(string: contributor.avatarUrl)!
+        let session = URLSession(configuration: .default)
+        var dataTask: URLSessionDataTask?
+        
+        dataTask = session.dataTask(with: dataUrl) { data, response, error in
+            if let error = error {
+                print("DataTask error: " + error.localizedDescription)
+            } else if let imageData = data,
+                let response = response as? HTTPURLResponse,
+                response.statusCode == 200 {
+                let image = UIImage(data: imageData)
+                
+                if image != nil {
+                    DispatchQueue.main.async {
+                        // Get table view cell and set image
+                        cell.avatarImage.image = image
+                    }
+                }
+                
+                
+            }
+        }
+        dataTask?.resume()
         
         return cell
     }
@@ -146,7 +169,6 @@ class ContributorsList: UITableViewController {
                 let response = response as? HTTPURLResponse,
                 response.statusCode == 200 {
                 do {
-                    //let json = try JSONSerialization.jsonObject(with: data, options:[]) as! [String: Any]
                     let json = try JSONSerialization.jsonObject(with: data, options: [])
                     
                     DispatchQueue.main.async {
