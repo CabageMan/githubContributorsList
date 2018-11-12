@@ -7,9 +7,25 @@
 //
 
 import UIKit
+import Foundation
+
+struct Contributor: Codable {
+    var login: String = ""
+    var id: Int = 0
+    var avatarUrl: String = ""
+    
+    // Override the property name to match the respective JSON field name
+    
+    enum CodingKeys : String, CodingKey {
+        case login = "first_Name"
+        case id
+        case avatarUrl = "medium_URL"
+    }
+    
+}
 
 // Initialization the contributors data array
-var contributors = [Dictionary<String, AnyObject>]()
+var contributors = [Contributor]()
 
 class ContributorsList: UITableViewController {
 
@@ -55,11 +71,12 @@ class ContributorsList: UITableViewController {
         // Get the contributor's data
         let contributor = contributors[indexPath.row]
         
+        
         // Fil the contributors data
         cell.avatarImage.image = UIImage(named: "placeHolderImage.jpg")
-        cell.loginLabel.text = contributor["login"] as? String
-        cell.idLabel.text = contributor["id"] as? String
-
+        cell.loginLabel.text = contributor.login
+        cell.idLabel.text = String(contributor.id)
+        
         return cell
     }
  
@@ -134,15 +151,14 @@ class ContributorsList: UITableViewController {
                     
                     DispatchQueue.main.async {
                         for person in json as! [Dictionary<String, AnyObject>] {
-                            var personData = [String: AnyObject]()
                             
-                            personData.updateValue(person["login"]!, forKey: "login")
-                            personData.updateValue(person["id"]!, forKey: "id")
-                            personData.updateValue(person["avatar_url"]!, forKey: "avatar_url")
+                            let contributor = Contributor(login: person["login"] as! String,
+                                                             id: person["id"] as! Int,
+                                                      avatarUrl: person["avatar_url"] as! String)
                             
-                            contributors.append(personData)
+                            contributors.append(contributor)
+                            
                         }
-                        print(contributors)
                         
                         self.tableView.reloadData()
                     }
