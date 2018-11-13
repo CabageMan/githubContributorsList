@@ -17,9 +17,26 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hig-I3-4Oh">
+                                <rect key="frame" x="16" y="96" width="343" height="343"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xaz-Q2-xYi">
+                                <rect key="frame" x="123" y="498" width="128" height="55"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="avatarImage" destination="hig-I3-4Oh" id="xDl-rV-POh"/>
+                        <outlet property="loginLabel" destination="xaz-Q2-xYi" id="hmE-qc-2Kj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -65,7 +82,7 @@
                                     <outlet property="avatarImage" destination="h89-kt-tov" id="8aX-GC-acz"/>
                                     <outlet property="idLabel" destination="1l8-jh-0Fm" id="jmr-zn-8O9"/>
                                     <outlet property="loginLabel" destination="X4K-uZ-111" id="arj-J7-PiN"/>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="XrV-Ds-zBa"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="showContributorDetails" id="XrV-Ds-zBa"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
