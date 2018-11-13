@@ -31,12 +31,6 @@ class ContributorsList: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
         self.getData()
     }
@@ -72,8 +66,8 @@ class ContributorsList: UITableViewController {
         
         // Fil the contributors data
         cell.avatarImage.image = UIImage(named: "placeHolderImage.jpg")
-        cell.loginLabel.text = contributor.login
-        cell.idLabel.text = String(contributor.id)
+        cell.loginLabel.text = "Login: " + contributor.login
+        cell.idLabel.text = "ID: " + String(contributor.id)
         
         // Configure the request and replace the avatar image if it exists
         let dataUrl = URL(string: contributor.avatarUrl)!
