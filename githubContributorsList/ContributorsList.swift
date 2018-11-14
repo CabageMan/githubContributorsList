@@ -24,13 +24,29 @@ struct Contributor: Codable {
     
 }
 
-// Initialization the contributors data array
+// Initialization of the contributors data array
 var contributors = [Contributor]()
+
+// Initialize the activity indicator
+var activityIndicator = UIActivityIndicatorView()
 
 class ContributorsList: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Set refreshControl
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl?.backgroundColor = UIColor.gray
+        self.refreshControl?.tintColor = UIColor.white
+        self.refreshControl?.addTarget(self, action: #selector(refreshData(_:)),
+                                                for: UIControlEvents.valueChanged)
+        
+        // Set the activity indicator
+        activityIndicator.color = UIColor.gray
+        activityIndicator.isHidden = true
+        activityIndicator.stopAnimating()
+        self.tableView.backgroundView = activityIndicator
         
         self.getData()
     }
@@ -119,8 +135,23 @@ class ContributorsList: UITableViewController {
         }
     }
     
+    @objc private func refreshData(_ sender: Any) {
+        // Fetch Weather Data
+        getData()
+    }
     
     func getData() {
+        
+        // Start activity indicator
+        if activityIndicator.isHidden {
+            activityIndicator.isHidden = false
+            activityIndicator.startAnimating()
+        }
+        
+        // Stop refresh control animation
+        if (self.refreshControl != nil) {
+            self.refreshControl?.endRefreshing()
+        }
         
         // Create URL of our request
         let dataUrl = URL(string: "https://api.github.com/repos/videolan/vlc/contributors")!
@@ -135,6 +166,11 @@ class ContributorsList: UITableViewController {
         
         dataTask = session.dataTask(with: dataUrl) { data, response, error in
             if let error = error {
+                // Stop activity indeicator
+                if !activityIndicator.isHidden {
+                    activityIndicator.isHidden = true
+                    activityIndicator.stopAnimating()
+                }
                 print("DataTask error: " + error.localizedDescription)
             } else if let data = data,
                 let response = response as? HTTPURLResponse,
@@ -153,10 +189,22 @@ class ContributorsList: UITableViewController {
                             
                         }
                         
+                        // Stop activity indeicator
+                        if !activityIndicator.isHidden {
+                            activityIndicator.isHidden = true
+                            activityIndicator.stopAnimating()
+                        }
+                        
+                        // Reload table view with fresh data
                         self.tableView.reloadData()
                     }
                     
                 } catch {
+                    // Stop activity indeicator
+                    if !activityIndicator.isHidden {
+                        activityIndicator.isHidden = true
+                        activityIndicator.stopAnimating()
+                    }
                     print("DataTask error: " + error.localizedDescription)
                 }
                 
