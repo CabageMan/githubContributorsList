@@ -13,15 +13,6 @@ struct Contributor: Codable {
     var login: String = ""
     var id: Int = 0
     var avatarUrl: String = ""
-    
-    // Override the property name to match the respective JSON field name
-    
-    enum CodingKeys : String, CodingKey {
-        case login = "first_Name"
-        case id
-        case avatarUrl = "medium_URL"
-    }
-    
 }
 
 // Initialization of the contributors data array
